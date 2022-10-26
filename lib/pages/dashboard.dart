@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:ice_man/pages/model/model.dart';
+import 'package:ice_man/pages/widgets/itemCard.dart';
 
 class DashBoard extends StatefulWidget {
   const DashBoard({Key? key}) : super(key: key);
@@ -11,6 +13,69 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
   bool fav = false;
+
+  List<ProductModel> productList = [
+    ProductModel(
+        fav: false,
+        imageUrl: "asset/products/gown (1).jpg",
+        productName: "valentino gown",
+        price: "\$200",
+        offerdPrice: "\$100"),
+    ProductModel(
+        fav: true,
+        imageUrl: "asset/products/gown (2).jpg",
+        productName: "isi ewu gown",
+        price: "\$1200",
+        offerdPrice: "\$1000"),
+    ProductModel(
+        fav: false,
+        imageUrl: "asset/products/shoe (1).jpg",
+        productName: "Galzy shoe",
+        price: "\$2000",
+        offerdPrice: "\$1900"),
+    ProductModel(
+        fav: false,
+        imageUrl: "asset/products/gown (1).jpg",
+        productName: "valentino gown",
+        price: "\$200",
+        offerdPrice: "\$100"),
+    ProductModel(
+        fav: true,
+        imageUrl: "asset/products/gown (2).jpg",
+        productName: "isi ewu gown",
+        price: "\$1200",
+        offerdPrice: "\$1000"),
+    ProductModel(
+        fav: false,
+        imageUrl: "asset/products/shoe (1).jpg",
+        productName: "Galzy shoe",
+        price: "\$2000",
+        offerdPrice: "\$1900"),
+    ProductModel(
+        fav: true,
+        imageUrl: "asset/products/shoe (2).jpg",
+        productName: "nike",
+        price: "\$2500",
+        offerdPrice: "\$2100"),
+    ProductModel(
+        fav: false,
+        imageUrl: "asset/products/shoe (3).jpg",
+        productName: "mugu",
+        price: "\$200",
+        offerdPrice: "\$100"),
+    ProductModel(
+        fav: true,
+        imageUrl: "asset/products/shoe (2).jpg",
+        productName: "nike",
+        price: "\$2500",
+        offerdPrice: "\$2100"),
+    ProductModel(
+        fav: false,
+        imageUrl: "asset/products/shoe (3).jpg",
+        productName: "mugu",
+        price: "\$200",
+        offerdPrice: "\$100")
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +92,7 @@ class _DashBoardState extends State<DashBoard> {
                   height: 100,
                   width: double.infinity,
                   child: Card(
-                    elevation: 5,
+                    elevation: 3,
                     shadowColor: Colors.amber,
                     color: Colors.white,
                     child: Row(
@@ -44,82 +109,15 @@ class _DashBoardState extends State<DashBoard> {
                         ]),
                   )),
               Expanded(
+
                 child: GridView.builder(
-                  // physics: NeverScrollableScrollPhysics(),
-
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 20),
-                  itemBuilder: (context, index) => Material(
-                    borderRadius: BorderRadius.circular(20),
-                    shadowColor: Colors.amber,
-                    elevation: 3,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: GridTile(
-                        header: Container(
-                          height: 40,
-                          color: Colors.black.withOpacity(0.4),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        fav = !fav;
-                                      });
-                                    },
-                                    icon: fav == true
-                                        ? Icon(
-                                            Icons.favorite,
-                                            color: Colors.red,
-                                          )
-                                        : Icon(
-                                            Icons.favorite_border_rounded,
-                                            color: Colors.white,
-                                          )),
-                                SizedBox(
-                                  width: 20,
-                                )
-                              ]),
-                        ),
-                        footer: Container(
-                          height: 40,
-                          color: Colors.black.withOpacity(0.7),
-                          child: Column(children: [
-                            Text(
-                              "adad",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0,right: 20),
-                              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-
-                                  Text(
-                                    "\$1200",
-                                    style: TextStyle(color: Colors.white60,decoration: TextDecoration.lineThrough,),
-
-                                  ),   Text(
-                                    "\$1200",
-                                    style: TextStyle(color: Colors.green),
-                                  )
-                                ],
-                              ),
-                            )
-                          ]),
-                        ),
-                        child: Image.asset(
-                          "asset/lucas.jpg",
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                    // physics: NeverScrollableScrollPhysics(),
+                    itemCount: productList.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 20),
+                    itemBuilder: (context, index) => ItemCard(fav: productList[index].fav, imageUrl: productList[index].imageUrl, productName: productList[index].productName, price: productList[index].price, offerdPrice: productList[index].offerdPrice)),
               )
             ],
           ),
